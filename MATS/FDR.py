@@ -25,7 +25,7 @@ def mycummin(p):
 
 def myFDR(p):
 	lp=len(p);
-	i=range(lp,0,-1);
+	i=list(range(lp,0,-1));
 	o=myorder(p,True);
 	ro=myorder(o,False);
 	p_new=[];

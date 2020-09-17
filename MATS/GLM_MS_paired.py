@@ -501,7 +501,7 @@ def MLE_iteration_constrain(i1,i2,s1,s2,effective_inclusion_length,effective_ski
 			xopt = fmin_l_bfgs_b(myfunc_individual,[psi2[i]],myfunc_individual_der,args=[i2[i],s2[i],beta_1,var2,effective_inclusion_length,effective_skipping_length],bounds=[[0.01,0.99]],iprint=-1);
 			new_psi2.append(float(xopt[0]));current_sum+=float(xopt[1]);print(xopt);
 			#likelihood_sum+=myfunc_marginal(new_psi2[i],[i2[i],s2[i],beta_1,var2,effective_inclusion_length,effective_skipping_length]);
-		print('new_psi[0]');print(new_psi1[0]);print(new_psi2[0]);
+		print('new_psi[0]');print((new_psi1[0]));print((new_psi2[0]));
 		psi1=new_psi1;psi2=new_psi2;
 		print('count');print(count);print('previous_sum');print(previous_sum);print('current_sum');print(current_sum);
 		if count>1:
@@ -544,8 +544,8 @@ def MLE_iteration(i1,i2,s1,s2,effective_inclusion_length,effective_skipping_leng
 			xopt = fmin_l_bfgs_b(myfunc_individual,[psi2[i]],myfunc_individual_der,args=[i2[i],s2[i],beta_1,var2,effective_inclusion_length,effective_skipping_length],bounds=[[0.01,0.99]],iprint=-1);
 			new_psi2.append(float(xopt[0]));current_sum+=float(xopt[1]);print(xopt);
 			#likelihood_sum+=myfunc_marginal(new_psi2[i],[i2[i],s2[i],beta_1,var2,effective_inclusion_length,effective_skipping_length]);
-		print('new_psi[0]');print(new_psi1[0]);print(new_psi2[0]);
-		psi1=new_psi1;psi2=new_psi2;print
+		print('new_psi[0]');print((new_psi1[0]));print((new_psi2[0]));
+		psi1=new_psi1;psi2=new_psi2;print()
 		print('count');print(count);('previous_sum');print(previous_sum);print('current_sum');print(current_sum);
 		if count>1:
 			iter_cutoff=abs(previous_sum-current_sum);
@@ -595,7 +595,7 @@ def MLE_marginal_iteration(i1,i2,s1,s2,effective_inclusion_length,effective_skip
 			xopt = fmin_l_bfgs_b(myfunc_individual,[psi2[i]],myfunc_individual_der,args=[i2[i],s2[i],beta_1,var2,effective_inclusion_length,effective_skipping_length],bounds=[[0.01,0.99]],iprint=-1);
 			new_psi2.append(float(xopt[0]));current_sum+=float(xopt[1]);
 			#likelihood_sum+=myfunc_marginal(new_psi2[i],[i2[i],s2[i],beta_1,var2,effective_inclusion_length,effective_skipping_length]);
-		print('new_psi[0]');print(new_psi1[0]);print(new_psi2[0]);
+		print('new_psi[0]');print((new_psi1[0]));print((new_psi2[0]));
 		psi1=new_psi1;psi2=new_psi2;
 		print('count');print(count);print('previous_sum');print(previous_sum);print('current_sum');print(current_sum);
 		if count>1:
@@ -690,7 +690,7 @@ def MLE_marginal_iteration_constrain(i1,i2,s1,s2,effective_inclusion_length,effe
 			xopt = fmin_l_bfgs_b(myfunc_individual,[psi2[i]],myfunc_individual_der,args=[i2[i],s2[i],beta_1,var2,effective_inclusion_length,effective_skipping_length],bounds=[[0.01,0.99]],iprint=-1);
 			new_psi2.append(float(xopt[0]));current_sum+=float(xopt[1]);print(xopt);
 			#likelihood_sum+=myfunc_marginal(new_psi2[i],[i2[i],s2[i],beta_1,var2,effective_inclusion_length,effective_skipping_length]);
-		print('new_psi[0]');print(new_psi1[0]);print(new_psi2[0]);
+		print('new_psi[0]');print((new_psi1[0]));print((new_psi2[0]));
 		psi1=new_psi1;psi2=new_psi2;
 		print('count');print(count);print('previous_sum');print(previous_sum);print('current_sum');print(current_sum);
 		if count>1:
@@ -838,7 +838,7 @@ def MLE_marginal_iteration_constrain_paired(i1,i2,s1,s2,effective_inclusion_leng
 	
 #Random Sampling Function
 def likelihood_test(i1,i2,s1,s2,effective_inclusion_length,effective_skipping_length,flag,id):
-	print('testing'+str(id));
+	print(('testing'+str(id)));
 	if flag==0:
 		return([1,0]);
 	else:
@@ -850,7 +850,7 @@ def likelihood_test(i1,i2,s1,s2,effective_inclusion_length,effective_skipping_le
 		else:
 			res_constrain=MLE_marginal_iteration_constrain(i1,i2,s1,s2,effective_inclusion_length,effective_skipping_length);
 			print('2>cutoff');print(res);print(res_constrain);
-			print(abs(res_constrain[0]-res[0]));print(pow(1-pow(res[1][6],2),2));print('2end');
+			print((abs(res_constrain[0]-res[0])));print((pow(1-pow(res[1][6],2),2)));print('2end');
 			#print(abs(res_constrain[2]-res[2]));print('2end_marginal');			
 			return([scipy.stats.chi2.sf(2*(abs(res_constrain[0]-res[0]))/pow(1-pow(res[1][6],2),2),1),res[1][-1]]);
 

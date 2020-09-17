@@ -237,7 +237,7 @@ def MLE_iteration_constrain(i1,i2,s1,s2,effective_inclusion_length,effective_ski
 			xopt = fmin_l_bfgs_b(myfunc_individual,[psi2[i]],myfunc_individual_der,args=[i2[i],s2[i],beta_1,var2,effective_inclusion_length,effective_skipping_length],bounds=[[0.01,0.99]],iprint=-1);
 			new_psi2.append(float(xopt[0]));current_sum+=float(xopt[1]);print(xopt);
 			#likelihood_sum+=myfunc_marginal(new_psi2[i],[i2[i],s2[i],beta_1,var2,effective_inclusion_length,effective_skipping_length]);
-		print('new_psi[0]');print(new_psi1[0]);print(new_psi2[0]);
+		print('new_psi[0]');print((new_psi1[0]));print((new_psi2[0]));
 		psi1=new_psi1;psi2=new_psi2;
 		print('count');print(count);print('previous_sum');print(previous_sum);print('current_sum');print(current_sum);
 		if count>1:
@@ -280,8 +280,8 @@ def MLE_iteration(i1,i2,s1,s2,effective_inclusion_length,effective_skipping_leng
 			xopt = fmin_l_bfgs_b(myfunc_individual,[psi2[i]],myfunc_individual_der,args=[i2[i],s2[i],beta_1,var2,effective_inclusion_length,effective_skipping_length],bounds=[[0.01,0.99]],iprint=-1);
 			new_psi2.append(float(xopt[0]));current_sum+=float(xopt[1]);print(xopt);
 			#likelihood_sum+=myfunc_marginal(new_psi2[i],[i2[i],s2[i],beta_1,var2,effective_inclusion_length,effective_skipping_length]);
-		print('new_psi[0]');print(new_psi1[0]);print(new_psi2[0]);
-		psi1=new_psi1;psi2=new_psi2;print
+		print('new_psi[0]');print((new_psi1[0]));print((new_psi2[0]));
+		psi1=new_psi1;psi2=new_psi2;print()
 		print('count');print(count);('previous_sum');print(previous_sum);print('current_sum');print(current_sum);
 		if count>1:
 			iter_cutoff=abs(previous_sum-current_sum);
@@ -328,7 +328,7 @@ def MLE_marginal_iteration(i1,i2,s1,s2,effective_inclusion_length,effective_skip
 			xopt = fmin_l_bfgs_b(myfunc_individual,[psi2[i]],myfunc_individual_der,args=[i2[i],s2[i],beta_1,var2,effective_inclusion_length,effective_skipping_length],bounds=[[0.01,0.99]],iprint=-1);
 			new_psi2.append(float(xopt[0]));current_sum+=float(xopt[1]);
 			#likelihood_sum+=myfunc_marginal(new_psi2[i],[i2[i],s2[i],beta_1,var2,effective_inclusion_length,effective_skipping_length]);
-		print('new_psi[0]');print(new_psi1[0]);print(new_psi2[0]);
+		print('new_psi[0]');print((new_psi1[0]));print((new_psi2[0]));
 		psi1=new_psi1;psi2=new_psi2;
 		print('count');print(count);print('previous_sum');print(previous_sum);print('current_sum');print(current_sum);
 		if count>1:
@@ -344,8 +344,8 @@ def MLE_marginal_iteration(i1,i2,s1,s2,effective_inclusion_length,effective_skip
 	iter_cutoff=1;iter_maxrun=100;count=0;previous_sum=0;
 	while((iter_cutoff>0.01)&(count<=iter_maxrun)):
 		count+=1;
-		print('unconstrain_MLE_marginal_value_1_der');print(myfunc_marginal_der(beta_0,i1,s1,psi1,var1,effective_inclusion_length,effective_skipping_length));
-		print('unconstrain_MLE_marginal_value_2_der');print(myfunc_marginal_der(beta_1,i2,s2,psi2,var2,effective_inclusion_length,effective_skipping_length))
+		print('unconstrain_MLE_marginal_value_1_der');print((myfunc_marginal_der(beta_0,i1,s1,psi1,var1,effective_inclusion_length,effective_skipping_length)));
+		print('unconstrain_MLE_marginal_value_2_der');print((myfunc_marginal_der(beta_1,i2,s2,psi2,var2,effective_inclusion_length,effective_skipping_length)))
 		xopt1=fmin_l_bfgs_b(myfunc_marginal,[beta_0],myfunc_marginal_der,args=[i1,s1,psi1,var1,effective_inclusion_length,effective_skipping_length],bounds=[[0.01,0.99]],iprint=-1);
 		xopt2=fmin_l_bfgs_b(myfunc_marginal,[beta_1],myfunc_marginal_der,args=[i2,s2,psi2,var2,effective_inclusion_length,effective_skipping_length],bounds=[[0.01,0.99]],iprint=-1);
 		beta_0=float(xopt1[0][0]);
@@ -410,7 +410,7 @@ def MLE_marginal_iteration_constrain(i1,i2,s1,s2,effective_inclusion_length,effe
 			xopt = fmin_l_bfgs_b(myfunc_individual,[psi2[i]],myfunc_individual_der,args=[i2[i],s2[i],beta_1,var2,effective_inclusion_length,effective_skipping_length],bounds=[[0.01,0.99]],iprint=-1);
 			new_psi2.append(float(xopt[0]));current_sum+=float(xopt[1]);print(xopt);
 			#likelihood_sum+=myfunc_marginal(new_psi2[i],[i2[i],s2[i],beta_1,var2,effective_inclusion_length,effective_skipping_length]);
-		print('new_psi[0]');print(new_psi1[0]);print(new_psi2[0]);
+		print('new_psi[0]');print((new_psi1[0]));print((new_psi2[0]));
 		psi1=new_psi1;psi2=new_psi2;
 		print('count');print(count);print('previous_sum');print(previous_sum);print('current_sum');print(current_sum);
 		if count>1:
@@ -452,7 +452,7 @@ def MLE_marginal_iteration_constrain(i1,i2,s1,s2,effective_inclusion_length,effe
 	
 #Random Sampling Function
 def likelihood_test(i1,i2,s1,s2,effective_inclusion_length,effective_skipping_length,flag,id):
-	print('testing'+str(id));
+	print(('testing'+str(id)));
 	if flag==0:
 		return([1,1]);
 	else:
@@ -463,7 +463,7 @@ def likelihood_test(i1,i2,s1,s2,effective_inclusion_length,effective_skipping_le
 		else:
 			res_constrain=MLE_marginal_iteration_constrain(i1,i2,s1,s2,effective_inclusion_length,effective_skipping_length);
 			print('2>cutoff');print(res);print(res_constrain);
-			print(abs(res_constrain[0]-res[0]));print('2end');
+			print((abs(res_constrain[0]-res[0])));print('2end');
 			#print(abs(res_constrain[2]-res[2]));print('2end_marginal');			
 			if len(i1)<=3:
 				return([1-scipy.stats.chi2.cdf(2*(abs(res_constrain[0]-res[0])),1)]);

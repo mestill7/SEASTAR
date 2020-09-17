@@ -83,19 +83,19 @@ def parse_cfgfile(cfg_file):
             
     
     if Group1_Tophat_aligned_file=='':
-        print >> sys.stderr, "No Tophat aligned BAM file for group 1!"
+        print("No Tophat aligned BAM file for group 1!", file=sys.stderr)
         exit(1)
     if Group2_Tophat_aligned_file=='':
-        print >> sys.stderr, "No Tophat aligned BAM file for group 2!"
+        print("No Tophat aligned BAM file for group 2!", file=sys.stderr)
         exit(1)
     if output_directory=='':
-        print >> sys.stderr, "No output directory!"
+        print("No output directory!", file=sys.stderr)
         exit(1)
     if Annotated_3UTR_file=='':
-        print >> sys.stderr, "No annotated 3' UTR file!"
+        print("No annotated 3' UTR file!", file=sys.stderr)
         exit(1)
     if Output_result_file=='':
-        print >> sys.stderr, "No result file name!"
+        print("No result file name!", file=sys.stderr)
         exit(1)
     return Group1_Tophat_aligned_file,Group2_Tophat_aligned_file,output_directory,Annotated_3UTR_file,Output_result_file,Num_least_in_group1_local,Num_least_in_group2_local,Coverage_cutoff_local,FDR_cutoff_local,Fold_change_cutoff_local,PDUI_cutoff_local
 
@@ -104,10 +104,10 @@ def De_Novo_3UTR_Identification_Loading_Target_Wig_for_TCGA_Multiple_Samples_Mai
     '''
     '''
     if len(sys.argv) == 1:
-        print "Please provide the configure file ..."
+        print("Please provide the configure file ...")
         exit(1)
     cfg_file = sys.argv[1]
-    print >> sys.stderr, "[%s] Start Analysis ..." % time_now()
+    print("[%s] Start Analysis ..." % time_now(), file=sys.stderr)
     Group1_Tophat_aligned_file,Group2_Tophat_aligned_file,output_directory,Annotated_3UTR_file,Output_result_file,Num_least_in_group1_local,Num_least_in_group2_local,Coverage_cutoff_local,FDR_cutoff_local,Fold_change_cutoff_local,PDUI_cutoff_local = parse_cfgfile(cfg_file)
     
     num_group_1 = len(Group1_Tophat_aligned_file)
@@ -150,10 +150,10 @@ def De_Novo_3UTR_Identification_Loading_Target_Wig_for_TCGA_Multiple_Samples_Mai
     num_samples = len(All_Sample_files)
     
     ##Debug
-    print >> sys.stderr, "[%s] Loading coverage ..." % time_now()
+    print("[%s] Loading coverage ..." % time_now(), file=sys.stderr)
     All_samples_Target_3UTR_coverages, All_samples_sequencing_depths, UTR_events_dict = Load_Target_Wig_files(All_Sample_files, Annotated_3UTR_file)
     All_sample_coverage_weights = All_samples_sequencing_depths/np.mean(All_samples_sequencing_depths)
-    print >> sys.stderr, "[%s] Loading coverage finished ..." % time_now()
+    print("[%s] Loading coverage finished ..." % time_now(), file=sys.stderr)
     ##Write the first line
     first_line = ['Gene','fit_value','Predicted_Proximal_5UTR','Loci']
     for i in range(num_group_1):
@@ -211,7 +211,7 @@ def De_Novo_3UTR_Identification_Loading_Target_Wig_for_TCGA_Multiple_Samples_Mai
         
     Output_result.close()
     
-    print >> sys.stderr, "[%s] Filtering the result ..." % time_now()
+    print("[%s] Filtering the result ..." % time_now(), file=sys.stderr)
     
     Output_Motif_filtered_result_file = output_directory+Output_result_file+'_All_Prediction_Results.txt'
     #UTR_APA_Result_filtering(Output_all_prediction_file,Genome_seq_fasta,Output_Motif_filtered_result_file)
@@ -231,7 +231,7 @@ def De_Novo_3UTR_Identification_Loading_Target_Wig_for_TCGA_Multiple_Samples_Mai
 
     
     
-    print >> sys.stderr, "[%s] Finished!" % time_now()
+    print("[%s] Finished!" % time_now(), file=sys.stderr)
 
     
 
@@ -410,9 +410,9 @@ def De_Novo_3UTR_Coverage_estimation_Genome_for_TCGA_multiple_samples(All_Sample
         Region_first_100_coverage_all_samples.append(curr_first_100_coverage)
     if sum(np.array(Region_first_100_coverage_all_samples) >= coverage_threshold) >= num_samples and UTR_end - UTR_start >= 150:
         if curr_strand == "+":
-            search_region = range(UTR_start+search_point_start, UTR_end-search_point_end+1)
+            search_region = list(range(UTR_start+search_point_start, UTR_end-search_point_end+1))
         else:
-            search_region = range(UTR_end - search_point_start, UTR_start+search_point_end-1, -1)
+            search_region = list(range(UTR_end - search_point_start, UTR_start+search_point_end-1, -1))
         
         search_region_start = search_point_start
         search_region_end   = UTR_end - UTR_start - search_point_end

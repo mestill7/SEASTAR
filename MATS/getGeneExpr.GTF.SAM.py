@@ -1,5 +1,5 @@
 #This script generate the gene expression based on the SAM files
-import re,os,sys,commands
+import re,os,sys,subprocess
 
 #Use dictionary to speed up the match
 chunk=1000;
@@ -35,7 +35,7 @@ for i in ilines:
 					Loc2Gene[element[0]][this_group]=[];
 				Loc2Gene[element[0]][this_group].append([start,stop,gene]);
 
-gene_list=Gene_dic.keys();gene_list_count={};
+gene_list=list(Gene_dic.keys());gene_list_count={};
 ifile.close();
 #print(Loc2Gene);
 
